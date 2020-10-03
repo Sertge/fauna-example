@@ -10,32 +10,19 @@ export default async function signuo(req, res) {
     }
     console.log(`email: ${email} trying to create user.`)
 
-    let user
+    let loginRes
 
     try {
-      user = await serverClient.query(
-        q.Create(q.Collection('User'), {
-          credentials: { password },
-          data: { email },
-        })
+      loginRes = await serverClient.query(
+        q.Call(q.Function('signupUser'), [ email , password ])
       )
     } catch (error) {
       console.error('Fauna create user error:', error)
-      throw new Error('User already exists.')
+      throw new Error('No secret present in login query response.')
     }
-
-    if (!user.ref) {
-      throw new Error('No ref present in create query response.')
-    }
-
-    const loginRes = await serverClient.query(
-      q.Login(user.ref, {
-        password,
-      })
-    )
 
     if (!loginRes.secret) {
-      throw new Error('No secret present in login query response.')
+      throw new Error('No ref present in create query response.')
     }
 
     const cookieSerialized = serializeFaunaCookie(loginRes.secret)

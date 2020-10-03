@@ -13,7 +13,7 @@ export default async function login(req, res) {
       q.Login(q.Match(q.Index('users_by_email'), email), {
         password,
       })
-    )
+    ).catch(err=>{console.log(err)})
 
     if (!loginRes.secret) {
       throw new Error('No secret present in login query response.')
