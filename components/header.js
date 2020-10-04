@@ -26,6 +26,11 @@ const Header = (props) => (
           </Link>
         </li>
         <li>
+          <Link href='/list-users'>
+            <a>Users</a>
+          </Link>
+        </li>
+        <li>
           <button onClick={logout}>Logout</button>
         </li>
       </ul>
