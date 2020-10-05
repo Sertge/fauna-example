@@ -35,6 +35,7 @@ const usersListed = () => {
   console.log(users)
   return (
     <Layout>
+      <h1>This page shows a list of users and the option to follow them</h1>
       {error ? (
         <h1>An error has occurred: {error.message}</h1>
       ) : users ? (
@@ -42,7 +43,7 @@ const usersListed = () => {
         <div key={index}>
           <hr/>
           <p>{user.isSelf?'Your':'This'} user id is <b>{user.userId}</b>  </p>
-          <p>Currently, you are {user.isFollowee?'following':'not following'} this user <button onClick={()=>followUser(user.userId)}>{user.isFollowee?'Unfollow user':'Follow user'}</button></p>
+          <p>Currently, you are {user.isFollowee?'following':'not following'} {user.isSelf?'yourself':'this user'} <button onClick={()=>followUser(user.userId)}>{user.isFollowee?'Unfollow':'Follow'}</button></p>
         </div>
         ))
       ) : (
