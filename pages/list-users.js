@@ -14,19 +14,19 @@ const fetcher = (url) =>
   })
 
 const followUser=async (followee)=>{
-    const response = await fetch('/api/follow-user', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ followee }),
-    })
-  
-    if (response.status !== 200) {
-      throw new Error(await response.text())
-    }
+  const response = await fetch('/api/follow-user', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ followee }),
+  })
+
+  if (response.status !== 200) {
+    throw new Error(await response.text())
+  }
   mutate('/api/list-users')
   
 }  
-const Profile = () => {
+const usersListed = () => {
   const router = useRouter()
   const { data: users, error } = useSWR('/api/list-users', fetcher)
   useEffect(() => {
@@ -45,8 +45,6 @@ const Profile = () => {
           <p>Currently, you are {user.isFollowee?'following':'not following'} this user <button onClick={()=>followUser(user.userId)}>{user.isFollowee?'Unfollow user':'Follow user'}</button></p>
         </div>
         ))
-        
-        
       ) : (
         <h1>Loading...</h1>
       )}
@@ -59,4 +57,4 @@ const Profile = () => {
   )
 }
 
-export default withAuthSync(Profile)
+export default withAuthSync(usersListed)

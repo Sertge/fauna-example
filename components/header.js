@@ -31,6 +31,11 @@ const Header = (props) => (
           </Link>
         </li>
         <li>
+          <Link href='/new-post'>
+            <a>New post</a>
+          </Link>
+        </li>
+        <li>
           <button onClick={logout}>Logout</button>
         </li>
       </ul>
