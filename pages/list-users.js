@@ -32,7 +32,7 @@ const usersListed = () => {
   useEffect(() => {
     if (error) router.push('/')
   }, [error, router])
-  console.log(users)
+  
   return (
     <Layout>
       <h1>This page shows a list of users and the option to follow them</h1>

@@ -1,6 +1,3 @@
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
-import useSWR, { mutate } from 'swr'
 import { withAuthSync } from '../utils/auth'
 import Layout from '../components/layout'
 
@@ -29,7 +26,7 @@ const fetcher = (url) =>
 const uploadPosts=()=>{
   return(
   <Layout>
-    <h1>Spread the word</h1>
+    <h1>Say it aloud!</h1>
     <form onSubmit={postUpdate}>
       <input type="text" name="description"/>
       <input type="submit" value="Submit" />

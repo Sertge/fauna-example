@@ -36,6 +36,11 @@ const Header = (props) => (
           </Link>
         </li>
         <li>
+          <Link href='/feed'>
+            <a>Feed</a>
+          </Link>
+        </li>
+        <li>
           <button onClick={logout}>Logout</button>
         </li>
       </ul>
