@@ -15,10 +15,10 @@ const fetcher = (url) =>
 
 const Profile = () => {
   const router = useRouter()
-  const { data: user, error: errorUser } = useSWR('/api/profile', fetcher)
+  let { data: user, error: errorUser } = useSWR('/api/profile', fetcher)
 
   useEffect(() => {
-    if (errorUser) router.push('/')
+    if (errorUser) {errorUser=null; router.push('/')}
   }, [errorUser, router])
 
   return (

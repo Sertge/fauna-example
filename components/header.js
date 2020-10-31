@@ -41,6 +41,11 @@ const Header = (props) => (
           </Link>
         </li>
         <li>
+          <Link href='/premium'>
+            <a>Premium</a>
+          </Link>
+        </li>
+        <li>
           <button onClick={logout}>Logout</button>
         </li>
       </ul>
