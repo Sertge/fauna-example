@@ -2,7 +2,6 @@ import { query as q } from 'faunadb'
 import { faunaClient } from '../../utils/fauna-auth'
 
 async function resetPassword(req,res){
-  console.log(req.body)
   const faunaSecret = req.body.token
   if (!faunaSecret) {
     return res.status(401).send('Auth token missing.')
@@ -12,7 +11,6 @@ async function resetPassword(req,res){
     const passwordConfirm= await faunaClient(faunaSecret)
     .query(q.Call(q.Function('resetPassword'),req.body.password))
     .catch((error)=>{console.log(error); return error})
-    console.log(passwordConfirm)
     if (passwordConfirm.message){
       if(passwordConfirm.message=='unauthorized') return res.status(401).send('This token has expired')
       throw new Error(passwordConfirm.message)
